@@ -36,6 +36,12 @@ struct USBMessage
 	uint8_t len;
 	uint8_t  data[0x8];
 };
+
+
+typedef QueueHandle_t xQueueHandle; //compatibility
+#define gpio_pad_select_gpio esp_rom_gpio_pad_select_gpio
+
+
 static xQueueHandle usb_mess_Que = NULL;
 
 void IRAM_ATTR timer_group0_isr(void *para)
@@ -104,14 +110,14 @@ void stest()
 
 
 #if CONFIG_IDF_TARGET_ESP32C3
-#define BLINK_GPIO 18
+#define BLINK_GPIO 2 //2=nodemcu
 #define DP_P   6
 #define DM_P  8
 
 #define DP_P1  -1
 #define DM_P1  -1
 #else
-#define BLINK_GPIO 22
+#define BLINK_GPIO 2 //2=nodemcu
 #define DP_P   16
 #define DM_P  17
 
